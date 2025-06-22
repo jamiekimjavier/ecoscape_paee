@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoScape - Your Guide to a Greener World</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+        :root {
+            --primary-color: #22c55e; /* Green 500 */
+            --secondary-color: #16a34a; /* Green 600 */
+            --accent-color: #dcfce7; /* Green 100 */
+            --text-primary: #1f2937; /* Gray 800 */
+            --text-secondary: #4b5563; /* Gray 600 */
+            --background-light: #f9fafb; /* Gray 50 */
+            --background-white: #ffffff;
+            --border-light: #e5e7eb; /* Gray 200 */
+        }
+        body {
+            font-family: "Public Sans", sans-serif;
+            scroll-behavior: smooth;
+        }
+        .nav-link {
+            @apply text-sm font-medium text-[var(--text-primary)] hover:text-[var(--primary-color)] transition-colors duration-300;
+        }
+        .nav-link.active {
+            @apply text-[var(--primary-color)] font-semibold;
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4;
+        }
+        .section-subtitle {
+            @apply text-lg text-[var(--text-secondary)] mb-8 max-w-3xl mx-auto;
+        }
+        .cta-button {
+             @apply flex items-center justify-center rounded-lg h-10 px-5 bg-[var(--primary-color)] text-white text-sm font-bold tracking-wide shadow-md hover:bg-[var(--secondary-color)] transition-all duration-300 transform hover:scale-105;
+        }
+        .card {
+            @apply bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col;
+        }
+        .card-image {
+            @apply w-full h-48 object-cover rounded-lg mb-4;
+        }
+        .card-content {
+            @apply flex flex-col flex-grow;
+        }
+        .card-title {
+            @apply text-xl font-bold text-gray-800 mb-2;
+        }
+        .card-text {
+            @apply text-gray-600 text-sm flex-grow;
+        }
+        .card-button {
+             @apply inline-block mt-4 text-sm font-semibold text-[var(--primary-color)] hover:text-[var(--secondary-color)] transition-colors duration-200;
+        }
+
+        .impact-list-item {
+            @apply bg-gray-50 p-6 rounded-lg transition-all duration-300 ease-in-out;
+        }
+        .impact-list-item:hover {
+            @apply transform scale-[1.02] shadow-lg bg-white;
+        }
+        
+        .page-background {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Page transition styles */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-[var(--background-light)]">
+    <div class="relative flex size-full min-h-screen flex-col overflow-x-hidden">
+        
+        <!-- HEADER -->
+        <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
+            <div class="container mx-auto flex items-center justify-between px-6 py-4">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="flex items-center gap-3 text-[var(--primary-color)]">
+                        <img src="https://placehold.co/32x32/22c55e/ffffff?text=E" alt="EcoScape Logo" class="rounded-full">
+                        <h1 class="text-xl font-bold text-gray-800">EcoScape</h1>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav id="desktop-nav" class="hidden md:flex items-center justify-center flex-grow gap-8">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#health-impacts" class="nav-link">Health Impacts</a>
+                    <a href="#actions" class="nav-link">Actions</a>
+                    <a href="#solutions" class="nav-link">Solutions</a>
+                    <a href="#resources" class="nav-link">Resources</a>
+                    <a href="#get-involved" class="nav-link">Get Involved</a>
+                </nav>
+
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <a href="#get-involved" class="cta-button hidden sm:flex">Get Involved</a>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100">
+                        <img src="https://placehold.co/24x24/1f2937/ffffff?text=M" alt="Menu Icon">
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Navigation -->
+            <div id="mobile-nav" class="hidden md:hidden px-6 pb-4">
+                <nav class="flex flex-col gap-4">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#health-impacts" class="nav-link">Health Impacts</a>
+                    <a href="#actions" class="nav-link">Actions</a>
+                    <a href="#solutions" class="nav-link">Solutions</a>
+                    <a href="#resources" class="nav-link">Resources</a>
+                    <a href="#get-involved" class="nav-link">Get Involved</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <!-- Home Page Section -->
+            <section id="home" class="page active">
+                <div class="relative">
+                    <div class="flex min-h-[calc(100vh-80px)] md:min-h-[600px] flex-col items-start justify-center bg-cover bg-center bg-no-repeat px-6 py-16 md:px-20" style='background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("https://images.pexels.com/photos/1250260/pexels-photo-1250260.jpeg");'>
+                        <div class="max-w-3xl text-left text-white">
+                            <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">A Greener Future Starts With You</h1>
+                            <p class="mt-4 text-lg font-light md:text-xl leading-relaxed">Explore the causes, impacts, and solutions to environmental pollution. Learn how we can protect our planet for future generations.</p>
+                            <a href="#actions" class="cta-button mt-8 !h-12 !px-8 !text-base">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                 <!-- Statistics Section -->
+                <div class="py-16 md:py-24 bg-white">
+                    <div class="container mx-auto px-6 md:px-10 max-w-screen-xl">
+                        <h2 class="text-3xl font-bold tracking-tight text-center mb-12">The Global Impact of Pollution</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                            <div>
+                                <img src="https://img.icons8.com/?size=100&id=4009&format=png&color=000000" alt="Death Icon" class="mx-auto mb-4">
+                                <p class="text-4xl font-bold text-[var(--primary-color)]">9 million</p>
+                                <p class="text-[var(--text-secondary)] mt-2">Premature deaths caused by pollution annually.</p>
+                                <a href="https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(22)00090-0/fulltext" class="text-xs text-gray-400 hover:underline">Source: The Lancet</a>
+                            </div>
+                            <div>
+                                <img src="https://img.icons8.com/?size=100&id=1946&format=png&color=000000" alt="Water Scarcity Icon" class="mx-auto mb-4">
+                                <p class="text-4xl font-bold text-[var(--primary-color)]">40%</p>
+                                <p class="text-[var(--text-secondary)] mt-2">Of the world's population is affected by water scarcity.</p>
+                                <a href="https://www.unicef.org/wash/water-scarcity" class="text-xs text-gray-400 hover:underline">Source: UNICEF</a>
+                            </div>
+                            <div>
+                                <img src="https://img.icons8.com/?size=100&id=2497&format=png&color=000000" alt="Deforestation Icon" class="mx-auto mb-4 ">
+                                <p class="text-4xl font-bold text-[var(--primary-color)]">1.8 billion</p>
+                                <p class="text-[var(--text-secondary)] mt-2">Tonnes of CO2 emissions from deforestation each year.</p>
+                                <a href="https://eos.com/blog/deforestation-and-greenhouse-gases/#:~:text=Every%20year%2C%20approximately%204.8%20billion,reduce%20its%20emissions%20starting%20now." class="text-xs text-gray-400 hover:underline">Source: EOS Data Analytics</a>
+                            </div>
+                            <div>
+                                <img src="https://img.icons8.com/?size=100&id=737&format=png&color=000000" alt="Plastic Waste Icon" class="mx-auto mb-4 ">
+                                <p class="text-4xl font-bold text-[var(--primary-color)]">8 million</p>
+                                <p class="text-[var(--text-secondary)] mt-2">Tons of plastic enter the ocean annually.</p>
+                                <a href="https://www.nationalgeographic.com/environment/article/plastic-pollution" class="text-xs text-gray-400 hover:underline">Source: National Geographic</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="py-16 md:py-24 bg-[var(--background-light)]">
+                    <div class="container mx-auto px-6 md:px-10 max-w-screen-xl">
+                        <h2 class="text-3xl font-bold tracking-tight text-center mb-12">Key Environmental Issues</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div class="card text-center"><img src="https://img.icons8.com/?size=100&id=F9t99W5k0W35&format=png&color=000000" alt="Air Pollution Icon" class="mx-auto mb-4"><h3 class="text-xl font-semibold mb-2">Air Pollution</h3><p class="text-[var(--text-secondary)]">Air pollution occurs when harmful substances, including particulate matter (PM), gases, and biological molecules, are released into the atmosphere. Common pollutants include carbon monoxide (CO), nitrogen oxides (NOx), sulfur dioxide (SO2), ozone (O3), and particulate matter (PM2.5 and PM10).</p></div>
+                            <div class="card text-center"><img src="https://img.icons8.com/?size=100&id=MhkU1HOeZffe&format=png&color=000000" alt="Water Pollution Icon" class="mx-auto mb-4"><h3 class="text-xl font-semibold mb-2">Water Pollution</h3><p class="text-[var(--text-secondary)]">Water pollution refers to the contamination of water bodies such as rivers, lakes, oceans, and groundwater with harmful substances. It occurs when pollutants like chemicals, waste, or toxins enter water sources, often through runoff, industrial discharge, or untreated sewage.</p></div>
+                            <div class="card text-center"><img src="https://img.icons8.com/?size=100&id=Z1uq6OhA7KYK&format=png&color=000000" alt="Industrial Waste Icon" class="mx-auto mb-4"><h3 class="text-xl font-semibold mb-2">Industrial Waste</h3><p class="text-[var(--text-secondary)]">Industrial pollution is the release of harmful substances into the air, water, and soil as a byproduct of industrial activities. Factories, chemical plants, mining operations, and manufacturing processes are primary sources of industrial pollution.</p></div>
+                            <div class="card text-center"><img src="https://img.icons8.com/?size=100&id=BTvXrfkFbl1R&format=png&color=000000" alt="Soil Pollution Icon" class="mx-auto mb-4"><h3 class="text-xl font-semibold mb-2">Soil Pollution</h3><p class="text-[var(--text-secondary)]">Soil pollution occurs when toxic substances, such as chemicals, pesticides, and heavy metals, degrade soil quality. This can reduce soil fertility and harm plants, animals, and humans who depend on the land for food.</p></div>
+                            <div class="card text-center"><img src="https://img.icons8.com/?size=100&id=snmKiz9NvIqQ&format=png&color=000000" alt="Noise Pollution Icon" class="mx-auto mb-4"><h3 class="text-xl font-semibold mb-2">Noise & Light Pollution</h3><p class="text-[var(--text-secondary)]">Noise pollution is the excessive or disturbing sound levels that interfere with normal activities or harm human health and wildlife. It is typically caused by transportation (cars, trains, planes), industrial activities, and urbanization.</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How Pollution Affects Us Section -->
+                <div class="py-16 md:py-24 bg-white">
+                    <div class="container mx-auto px-6 md:px-10 max-w-screen-xl">
+                        <h2 class="text-3xl font-bold tracking-tight text-center mb-12">How Pollution Affects Us All</h2>
+                        <ul class="space-y-8">
+                            <li class="impact-list-item">
+                                <h3 class="text-2xl font-semibold mb-3">Air Pollution</h3>
+                                <p><strong>Humans:</strong> Respiratory diseases (asthma, lung cancer), cardiovascular damage, and reduced life expectancy.</p>
+                                <p><strong>Animals:</strong> Respiratory issues in mammals, acid rain damaging aquatic life.</p>
+                                <p><strong>Plants:</strong> Acid rain damages forests and crops, leading to reduced growth and potential famine.</p>
+                            </li>
+                             <li class="impact-list-item">
+                                <h3 class="text-2xl font-semibold mb-3">Water Pollution</h3>
+                                <p><strong>Humans:</strong> Waterborne diseases like cholera and typhoid, poisoning from chemical contaminants.</p>
+                                <p><strong>Animals:</strong> Death of aquatic life from toxins and oxygen depletion, disruption of the entire food chain.</p>
+                                <p><strong>Plants:</strong> Contaminated water harms crop health and soil fertility, impacting food supply.</p>
+                            </li>
+                            <li class="impact-list-item">
+                                <h3 class="text-2xl font-semibold mb-3">Soil Pollution</h3>
+                                <p><strong>Humans:</strong> Health risks from direct contact or from eating contaminated plants and animals.</p>
+                                <p><strong>Animals:</strong> Loss of habitat and food sources, poisoning from contaminated soil.</p>
+                                <p><strong>Plants:</strong> Reduced crop yields, desertification, and famine.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Health Impacts Page Section -->
+            <section id="health-impacts" class="page page-background" style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop');">
+                 <div class="py-12 md:py-20 container mx-auto px-6">
+                    <div class="text-center mb-12 md:mb-16">
+                        <h1 class="section-title">Health Impacts of Environmental Pollution</h1>
+                        <p class="section-subtitle">Environmental pollution poses significant risks to human health, affecting various systems and leading to a range of diseases.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 md:mb-16">
+                         <div class="card"><div class="card-content"><h2 class="card-title">Respiratory Issues</h2><img alt="Lungs affected by pollution" class="card-image" src="https://media.istockphoto.com/id/530196490/photo/3d-illustration-of-lungs-medical-concept.jpg?s=612x612&w=0&k=20&c=JWac3KM2myfIS5O8vcMXXnBlSQiOGeN7h2OZUvzwgPI="><p class="card-text">Exposure to air pollutants can cause or exacerbate respiratory conditions like asthma and chronic bronchitis, especially in vulnerable populations.</p><a href="https://www.epa.gov/pmcourse/particle-pollution-and-respiratory-effects" class="card-button">Source</a></div></div>
+                         <div class="card"><div class="card-content"><h2 class="card-title">Cardiovascular Diseases</h2><img alt="Heart illustration" class="card-image" src="https://media.istockphoto.com/id/530199842/photo/3d-illustration-of-heart-medical-concept.jpg?s=612x612&w=0&k=20&c=4OndFgI-QkDkPGs_zBeRVVIdofZKQ1ogEX5bhCEW4-g="><p class="card-text">Fine particulate matter can enter the bloodstream, causing inflammation, damaging blood vessels, and increasing the risk of heart attacks and strokes.</p><a href="https://www.epa.gov/air-research/air-pollution-and-cardiovascular-disease-basics" class="card-button">Source</a></div></div>
+                         <div class="card"><div class="card-content"><h2 class="card-title">Cancer</h2><img alt="Cancer cells" class="card-image" src="https://t4.ftcdn.net/jpg/02/93/58/47/360_F_293584799_wgcZ9SRCpHC5fXTAL2eytD32i9hW7wBu.jpg"><p class="card-text">Long-term exposure to pollutants like asbestos, radon, and industrial chemicals is a known risk factor for various types of cancer.</p><a href="https://www.aacr.org/patients-caregivers/progress-against-cancer/air-pollution-associated-cancer/" class="card-button">Source</a></div></div>
+                         <div class="card"><div class="card-content"><h2 class="card-title">Waterborne Diseases</h2><img alt="Microscope view of water" class="card-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSInYeK2Rp_WqAa6TUjygw6LkLuhVvCnJlSuQ&s"><p class="card-text">Contaminated water sources lead to diseases such as cholera, dysentery, and typhoid, affecting millions worldwide.</p><a href="https://www.who.int/news-room/fact-sheets/detail/drinking-water" class="card-button">Source</a></div></div>
+                         <div class="card"><div class="card-content"><h2 class="card-title">Premature Death</h2><img alt="Hourglass" class="card-image" src="https://www.poynter.org/wp-content/uploads/2003/06/shutterstock_549656056-1500x1000.jpg"><p class="card-text">Pollution is one of the leading risk factors for premature death globally, contributing to millions of deaths each year from heart disease, stroke, and lung cancer.</p><a href="https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health" class="card-button">Source</a></div></div>
+                         <div class="card"><div class="card-content"><h2 class="card-title">Starvation & Famine</h2><img alt="Dry cracked earth" class="card-image" src="https://media.istockphoto.com/id/1077574640/photo/dried-and-cracked-land.jpg?s=612x612&w=0&k=20&c=liURovKjAHNNfi-UusXSuHcakQpHGoV4JDgcSLwxqS0="><p class="card-text">Soil and water pollution degrade agricultural land, leading to crop failure, food shortages, and potential famine in affected regions.</p><a href="https://www.ccacoalition.org/content/short-lived-climate-pollutants-and-food-security" class="card-button">Source</a></div></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Actions Page Section -->
+            <section id="actions" class="page page-background" style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop');">
+                 <div class="py-12 md:py-20 container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h1 class="section-title">Protecting Our Planet: Actions for a Healthier Future</h1>
+                        <p class="section-subtitle">Discover practical steps you can take to combat environmental pollution. Every action, no matter how small, contributes to a significant positive impact.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                       <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4O5YPMBzKhwqaIAW-c2YPUOUI19f7OzJEHw&s" class="card-image" alt="Public Transportation"><div class="card-content"><h3 class="card-title">Sustainable Transportation</h3><p class="card-text">Opt for public transport, cycling, or walking. Choose fuel-efficient or electric vehicles.</p><a href="https://sdgs.un.org/topics/sustainable-transport" class="card-button">Learn More</a></div></div>
+                       <div class="card"><img src="https://metalink.com.ph/wp-content/uploads/2023/11/Types-of-Solar-Panels-How-to-Choose-Based-On-Efficiency-and-Savings.jpg" class="card-image" alt="Solar Panels"><div class="card-content"><h3 class="card-title">Energy Conservation</h3><p class="card-text">Switch to energy-efficient appliances. Unplug electronics and reduce heating/cooling.</p><a href="https://www.carboncollective.co/sustainable-investing/energy-conservation" class="card-button">Learn More</a></div></div>
+                       <div class="card"><img src="https://perstorp.my/wp-content/uploads/2021/11/MGB240-Recycling-Bin-Malaysia.jpg" class="card-image" alt="Recycling Bins"><div class="card-content"><h3 class="card-title">Reduce, Reuse, Recycle</h3><p class="card-text">Choose products with minimal packaging, opt for reusables, and recycle/compost.</p><a href="https://www.epa.gov/recycle" class="card-button">Learn More</a></div></div>
+                       <div class="card"><img src="https://media.istockphoto.com/id/1365692265/photo/mid-adult-man-checking-financial-information-on-a-smart-phone-while-doing-his-bookkeeping.jpg?s=612x612&w=0&k=20&c=5A1v0oKUlB62MeQdDOH8V4pUaQAj34GnfhfMG5lf7FY=" class="card-image" alt="Person using phone with charts"><div class="card-content"><h3 class="card-title">Track Carbon Footprint</h3><p class="card-text">Use online calculators to understand your personal impact and find ways to reduce it.</p><a href="https://www.climatestewards.org/offset/" class="card-button">Learn More</a></div></div>
+                       <div class="card"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/b3/cd/5f/caption.jpg?w=900&h=500&s=1" class="card-image" alt="Government Building"><div class="card-content"><h3 class="card-title">Government Advocacy</h3><p class="card-text">Contact your representatives to support policies that promote environmental sustainability.</p><a href="https://climate.gov.ph/" class="card-button">Learn More</a></div></div>
+                       <div class="card"><img src="https://i.pinimg.com/1200x/b5/b6/18/b5b61804074f37ecf58c3987babdbeea.jpg" class="card-image" alt="Clothes on a rack"><div class="card-content"><h3 class="card-title">Conscious Clothing</h3><p class="card-text">Avoid fast fashion. Invest in durable clothing, buy second-hand, or rent for occasions.</p><a href="https://www.thegoodtrade.com/features/eco-friendly-clothing-brands/" class="card-button">Learn More</a></div></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Solutions Page Section -->
+            <section id="solutions" class="page page-background" style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');">
+                <div class="py-12 md:py-20 container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h1 class="section-title">Innovations in Pollution Control</h1>
+                        <p class="section-subtitle">Explore advancements in technologies, policies, and initiatives aimed at combating environmental pollution and restoring our planet's health.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card"><img src="https://cdn.britannica.com/10/222610-138-F0268996/britannica-insights-Phil-the-Fixer-renewable-energy.jpg?w=800&h=450&c=crop" class="card-image" alt="Wind Turbines"><div class="card-content"><h3 class="card-title">Renewable Energy</h3><p class="card-text">Harnessing power from solar, wind, and geothermal sources to replace fossil fuels.</p><a href="https://www.sciencedirect.com/science/article/pii/S2590123024013768" class="card-button">Source</a></div></div>
+                        <div class="card"><img src="https://static.wixstatic.com/media/6281d3_383c2ea10aae4f6e9810a7b4e50e5d81~mv2.jpg/v1/fill/w_1120,h_800,al_c,q_85/Carbon%20Capture%20Cover.jpg" class="card-image" alt="Industrial Factory"><div class="card-content"><h3 class="card-title">Carbon Capture</h3><p class="card-text">Technologies that capture CO2 emissions from sources like power plants before they enter the atmosphere.</p><a href="https://www.sciencedirect.com/science/article/pii/S2772656824000502" class="card-button">Source</a></div></div>
+                        <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7tliaqoLfKLo5bzOdWM9SGQds1WwLX9VEFQ&s" class="card-image" alt="Electric Car Charging"><div class="card-content"><h3 class="card-title">Electric Vehicles</h3><p class="card-text">Battery-powered cars that produce zero tailpipe emissions, reducing urban air pollution.</p><a href="https://evmagazine.com/technology/top-10-innovations-in-electric-vehicles" class="card-button">Source</a></div></div>
+                        <div class="card"><img src="https://earth.org/wp-content/uploads/2022/05/Untitled-1024-%C3%97-768px-16.jpg" class="card-image" alt="Cardboard Packaging"><div class="card-content"><h3 class="card-title">Biodegradable Packaging</h3><p class="card-text">Plant-based materials that break down naturally, reducing plastic waste in landfills and oceans.</p><a href="https://www.sciencedirect.com/science/article/abs/pii/S2352554124001542" class="card-button">Source</a></div></div>
+                        <div class="card"><img src="https://therealtytoday.com/media/Picsart_24-07-04_12-25-05-602.jpg" class="card-image" alt="Green wall on a building"><div class="card-content"><h3 class="card-title">Pollution Absorbing Materials</h3><p class="card-text">Innovative materials like special paints and concretes that can neutralize air pollutants.</p><a href="https://www.power-technology.com/news/cheap-sustainable-material-absorbs-pollution/" class="card-button">Source</a></div></div>
+                        <div class="card"><img src="https://t4.ftcdn.net/jpg/02/39/26/45/360_F_239264568_6a8mM5lPYxROHgCOvmaUFmyCtlnXJVfF.jpg" class="card-image" alt="Clean water tap"><div class="card-content"><h3 class="card-title">Smart Water Filtration</h3><p class="card-text">Advanced, sensor-based systems that provide clean drinking water by removing contaminants efficiently.</p><a href="https://science.howstuffworks.com/environmental/green-tech/sustainable/10-innovations-water-purification.htm" class="card-button">Source</a></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources Page Section -->
+            <section id="resources" class="page page-background" style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1488229297570-58520851e868?q=80&w=2069&auto=format&fit=crop');">
+                <div class="py-12 md:py-20 container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h1 class="section-title">Educational Resources</h1>
+                        <p class="section-subtitle">Explore a curated collection of articles, videos, and tools to deepen your understanding of environmental pollution.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card"><img src="https://geoawesome.com/wp-content/uploads/2022/03/who_luftguete_karte_body01_n.4712926.jpg" class="card-image" alt="World map with data points"><div class="card-content"><h3 class="card-title">Air Quality Index Map</h3><p class="card-text">Real-time maps showing air quality levels in cities around the world.</p><a href="https://www.iqair.com/air-quality-map?srsltid=AfmBOorlhTfnFXkOQYnKC8yLbl3CmUCSzQHHFGpuPR-unoK5_ecV7dy_" class="card-button">View Resource</a></div></div>
+                        <div class="card"><img src="https://i.redd.it/vcu8de5b6gad1.jpeg" class="card-image" alt="Map of a river"><div class="card-content"><h3 class="card-title">Water Pollution Information</h3><p class="card-text">Data on the health of rivers, lakes, and oceans in your area.</p><a href="https://water.org/our-impact/where-we-work/philippines/" class="card-button">View Resource</a></div></div>
+                        <div class="card"><img src="https://www.sustainabilitytracker.com/wp-content/uploads/2024/05/Features-page_B2B-Header_2.jpg" class="card-image" alt="Dashboard on a screen"><div class="card-content"><h3 class="card-title">Sustainability Tracker</h3><p class="card-text">An app to help you track and reduce your personal environmental footprint.</p><a href="https://www.sustainabilitytracker.com/" class="card-button">View Resource</a></div></div>
+                        <div class="card"><img src="https://static-secure.guim.co.uk/sys-images/Guardian/Pix/maps_and_graphs/2011/07/15/ClimateProgress.gif" class="card-image" alt="Global map projection"><div class="card-content"><h3 class="card-title">Interactive Climate Action Map</h3><p class="card-text">Explore climate change policies and initiatives being implemented globally.</p><a href="https://climateactiontracker.org/" class="card-button">View Resource</a></div></div>
+                        <div class="card"><img src="https://t3.ftcdn.net/jpg/01/33/49/22/360_F_133492249_piBI1o2jc2auyjUq6rfPRiAiDgcok4BQ.jpg" class="card-image" alt="Newspapers"><div class="card-content"><h3 class="card-title">Environmental News</h3><p class="card-text">Stay up-to-date with the latest news and research from top environmental journals.</p><a href="https://www.enn.com/" class="card-button">View Resource</a></div></div>
+                        <div class="card"><img src="https://i.pcmag.com/imagery/articles/01dITSJznwNhfew5UYscn3c-2..v1693581778.jpg" class="card-image" alt="Calculator and a plant"><div class="card-content"><h3 class="card-title">Carbon Footprint Calculator</h3><p class="card-text">Calculate your personal carbon footprint and learn how to reduce your impact.</p><a href="https://www.climatestewards.org/offset/" class="card-button">View Resource</a></div></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Get Involved Page Section -->
+            <section id="get-involved" class="page page-background" style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1542601906-82edd6e52862?q=80&w=2070&auto=format&fit=crop');">
+                <div class="py-12 md:py-20 container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h1 class="section-title">Get Involved: Support an NGO</h1>
+                        <p class="section-subtitle">You can make a difference by supporting organizations dedicated to protecting our planet. Here are a few leading non-governmental organizations (NGOs) you can connect with.</p>
+                    </div>
+                    <div class="space-y-12">
+                        <!-- NGO Card -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden md:flex">
+                           <img src="https://fca7603378a4e3ebeab2-4e03b1ac88f27f7b20b4cf232f717383.ssl.cf1.rackcdn.com/photos/social/landing_page_share2.jpg" alt="WWF Logo" class="w-full h-64 md:w-1/3 object-cover">
+                           <div class="p-6 md:p-8 flex flex-col justify-between">
+                               <div>
+                                   <h3 class="text-2xl font-bold mb-2">World Wildlife Fund (WWF)</h3>
+                                   <p class="text-gray-600 mb-4">WWF works to conserve nature and reduce the most pressing threats to the diversity of life on Earth.</p>
+                                   <p class="text-sm text-gray-500"><strong>Location:</strong> Gland, Switzerland (International)</p>
+                                   <p class="text-sm text-gray-500"><strong>Contact:</strong> wwf.org</p>
+                               </div>
+                               <a href="https://www.worldwildlife.org/donate" target="_blank" class="cta-button mt-4 w-fit">Donate Now</a>
+                           </div>
+                        </div>
+                        <!-- NGO Card -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden md:flex">
+                           <img src="https://www.wjtv.com/wp-content/uploads/sites/72/2025/03/67dba87b4db5e6.58792595.jpeg?w=2560&h=1440&crop=1" alt="Greenpeace Logo" class="w-full h-64 md:w-1/3 object-cover">
+                           <div class="p-6 md:p-8 flex flex-col justify-between">
+                               <div>
+                                   <h3 class="text-2xl font-bold mb-2">Greenpeace</h3>
+                                   <p class="text-gray-600 mb-4">Greenpeace is an independent campaigning organization, which uses non-violent, creative confrontation to expose global environmental problems.</p>
+                                   <p class="text-sm text-gray-500"><strong>Location:</strong> Amsterdam, Netherlands (International)</p>
+                                   <p class="text-sm text-gray-500"><strong>Contact:</strong> greenpeace.org</p>
+                               </div>
+                               <a href="https://www.greenpeace.org/international/act/donate/" target="_blank" class="cta-button mt-4 w-fit">Donate Now</a>
+                           </div>
+                        </div>
+                         <!-- NGO Card -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden md:flex">
+                           <img src="https://shopwhatsgood.com/cdn/shop/articles/WHATSGOOD_NON-PROFIT_blogsized_NATURE_CONSERVANCY_1198_x_750_px_1_1198x.jpg?v=1711383534" alt="The Nature Conservancy Logo" class="w-full h-64 md:w-1/3 object-cover">
+                           <div class="p-6 md:p-8 flex flex-col justify-between">
+                               <div>
+                                   <h3 class="text-2xl font-bold mb-2">The Nature Conservancy</h3>
+                                   <p class="text-gray-600 mb-4">Working around the world to protect ecologically important lands and waters for nature and people.</p>
+                                   <p class="text-sm text-gray-500"><strong>Location:</strong> Arlington, Virginia, USA (International)</p>
+                                   <p class="text-sm text-gray-500"><strong>Contact:</strong> nature.org</p>
+                               </div>
+                               <a href="https://www.nature.org/en-us/membership-and-giving/donate-to-our-mission/" target="_blank" class="cta-button mt-4 w-fit">Donate Now</a>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- FOOTER -->
+        <footer class="bg-[var(--text-primary)] text-gray-300 py-12 px-6 mt-auto">
+            <div class="container mx-auto text-center">
+                <p class="text-lg font-semibold text-white mb-2">EcoScape</p>
+                <p class="text-sm mb-4">Protecting our planet, one action at a time.</p>
+                <p class="text-xs text-gray-400 mt-8">&copy; 2024 EcoScape. All rights reserved. Made by Jamie Kim M. Javier for PaEE</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link, a[href^="#"]');
+            const pages = document.querySelectorAll('.page');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileNav = document.getElementById('mobile-nav');
+
+            function showPage(pageId) {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show the target page
+                const targetPage = document.querySelector(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+
+                // Update active link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Scroll to top of page
+                window.scrollTo(0, 0);
+            }
+
+            // Navigation click handler
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if(href.startsWith('#')) {
+                        e.preventDefault();
+                        const pageId = href;
+                        
+                        // Update URL hash
+                        history.pushState(null, null, pageId);
+                        
+                        showPage(pageId);
+
+                        // Close mobile menu if open
+                        if (!mobileNav.classList.contains('hidden')) {
+                            mobileNav.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', function() {
+                mobileNav.classList.toggle('hidden');
+            });
+
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', function() {
+                let pageId = location.hash || '#home';
+                showPage(pageId);
+            });
+
+            // Show initial page based on URL hash or default to #home
+            let initialPageId = location.hash || '#home';
+            showPage(initialPageId);
+        });
+    </script>
+</body>
+</html>
